@@ -30,7 +30,7 @@ const register = async (req: Request, res: Response): Promise<void> => {
   if (role === 'admin' && !config.WHITELIST_ADMINS_MAIL.includes(email)) {
     res.status(403).json({
       code: 'AuthorizationError',
-      message: 'You cannot register asan admin',
+      message: 'You cannot register as an admin',
     });
     logger.warn(
       `User with email ${email} tried to register as an admin but is not in the whitelist`,

@@ -7,6 +7,7 @@
  * Custom modules
  */
 import { logger } from '@/lib/winston';
+import user from '@/models/user';
 
 /**
  * Models

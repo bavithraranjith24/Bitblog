@@ -86,6 +86,7 @@ router.post(
     .withMessage('Password must be less than 8 characters long')
     .custom(async (value, { req }) => {
       const { email } = req.body as { email: string };
+
       const user = await User.findOne({ email })
         .select('password')
         .lean()
@@ -94,11 +95,14 @@ router.post(
       if (!user) {
         throw new Error('User email or password is invalied');
       }
+
       const passwordMatch = await bcrypt.compare(value, user.password);
 
       if (!passwordMatch) {
         throw new Error('User email or password is invalied');
       }
+      console.log('Entered password:', value);
+      console.log('Stored hash:', user.password);
     }),
   validationError,
   login,
